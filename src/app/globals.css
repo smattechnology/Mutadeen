@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+  /* // color brand = #4FCE5D
+  // color 2 = #2C5C15
+  // color 3 = #095E54 */
+
+.bg-brand {
+  background-color: #4FCE5D;
+}
+.bg-2 {
+  background-color: #2C5C15;
+}
+.bg-3 {
+  background-color: #095E54;
+}
+
+.color-brand {
+  color: #4FCE5D;
+}
+
+.color-2 {
+  color: #2C5C15;
+}
+
+.color-3 {
+  color: #095E54;
+}
