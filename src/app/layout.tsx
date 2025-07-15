@@ -35,7 +35,7 @@ export default function RootLayout({
 
         <div className="flex flex-col items-center justify-center p-8 border-t border-gray-200 bg-3 text-gray-300">
           {/* Footer or additional content can go here */}
-          <p>© 2023 Mutadeen. All rights reserved.</p>
+          <p>© 2025 Mutadeen. All rights reserved.</p>
         </div>
       </body>
     </html>
