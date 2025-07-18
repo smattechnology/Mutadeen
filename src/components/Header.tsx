@@ -1,6 +1,6 @@
 import React from "react";
 import { Search } from "lucide-react";
-
+import Link from "next/link";
 const Header = () => {
   // ✓ হোম
   // ✓ গ্যালারি
@@ -25,7 +25,9 @@ const Header = () => {
   return (
     <header className="w-full py-4 bg-gray-100 border-b border-gray-200 space-y-4">
       <div className="lg:max-w-7xl mx-auto flex justify-between items-center">
-        <h1 className="text-xl font-bold">Mutadeen</h1>
+        <Link href="/" className="text-xl font-bold">
+          Mutadeen
+        </Link>
 
         <div className="flex justify-center items-center gap-3">
           <button className="px-4 py-2 text-white rounded-sm bg-brand">
@@ -41,12 +43,12 @@ const Header = () => {
         <ul className="lg:max-w-7xl mx-auto flex space-x-2 px-4 py-2">
           {navLinks.map((link) => (
             <li key={link.name}>
-              <a
+              <Link
                 href={link.href}
                 className="text-white hover:text-blue-500 px-4 py-2"
               >
                 {link.name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
