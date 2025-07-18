@@ -147,19 +147,19 @@ const dummyPosts = [
   },
 ];
 
-interface PageProps {
-  params: {
-    currentPage: Promise<{ currentPage: string }> | { currentPage: string };
-  };
-}
+// interface PageProps {
+//   params: {
+//     currentPage: Promise<{ currentPage: string }>;
+//   };
+// }
+export type PageProps = Promise<{ currentPage: string }>;
 
 const POSTS_PER_PAGE = 10; // adjust if needed
 
-export default async function BlogPage({ params }: PageProps) {
-  const page = params instanceof Promise ? await params : params;
-  const { currentPage } = page;
+export default async function BlogPage(props: { params: PageProps }) {
+  const { currentPage } = await props.params;
 
-  const currentPageInt = parseInt(currentPage ? currentPage : 1, 10);
+  const currentPageInt = parseInt(currentPage ? currentPage : "1", 10);
   const totalPages = Math.ceil(dummyPosts.length / POSTS_PER_PAGE);
 
   // Validate current page bounds
