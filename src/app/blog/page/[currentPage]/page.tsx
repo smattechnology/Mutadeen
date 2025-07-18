@@ -1,5 +1,6 @@
 import Card from "@/components/card/Card";
 import PostCard from "@/components/card/PostCard";
+import { SendHorizontal } from "lucide-react";
 import Link from "next/link";
 const dummyPosts = [
   {
@@ -181,10 +182,12 @@ export default async function BlogPage(props: { params: PageProps }) {
   const pagedPosts = dummyPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
 
   return (
-    <div className="w-full lg:max-w-7xl mx-auto p-10 flex flex-col justify-between items-start">
-      <div className="w-full flex justify-center items-center">Post List</div>
+    <div className="w-full py-2 flex flex-col justify-between items-start">
+      <div className="w-full bg-[#2C5C15] text-white flex justify-center items-center">
+        <h2 className="p-2 text-3xl font-bold">ব্লগস (Blogs)</h2>
+      </div>
 
-      <div className="w-full flex justify-between items-start gap-4">
+      <div className="w-full pt-4 lg:max-w-7xl mx-auto flex justify-between items-start gap-4">
         <div className="w-4/5 flex flex-col gap-4">
           {pagedPosts.map((post) => (
             <PostCard
@@ -200,7 +203,22 @@ export default async function BlogPage(props: { params: PageProps }) {
           ))}
         </div>
         <div className="w-1/5">
-          <span>Category List</span>
+          <div className="w-full border-b-4 border-[#4FCE5D]">
+            <span className="text-2xl font-bold">ক্যাটাগরি (Category)</span>
+          </div>
+          <div className="space-y-4 py-4">
+            {pagedPosts.map((post, index) => (
+              <div
+                key={index}
+                className="w-full bg-[#4FCE5D] text-black font-bold rounded-sm flex justify-start items-center gap-2 p-2"
+              >
+                <span>
+                  <SendHorizontal />
+                </span>
+                <span>{post.title}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -208,7 +226,9 @@ export default async function BlogPage(props: { params: PageProps }) {
       <div className="w-full flex justify-center items-center gap-2 mt-6">
         {/* Prev button */}
         <Link
-          href={`/blog/${currentPageInt - 1 === 1 ? "" : currentPageInt - 1}`}
+          href={`/blog/${
+            currentPageInt - 1 === 1 ? "" : "page/" + (currentPageInt - 1)
+          }`}
         >
           <button
             className="px-3 py-1 rounded border text-gray-600 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
@@ -222,7 +242,10 @@ export default async function BlogPage(props: { params: PageProps }) {
         {Array.from({ length: endPage - startPage + 1 }, (_, idx) => {
           const pageNum = startPage + idx;
           return (
-            <Link key={pageNum} href={`/blog/${pageNum === 1 ? "" : pageNum}`}>
+            <Link
+              key={pageNum}
+              href={`/blog/page/${pageNum === 1 ? "" : pageNum}`}
+            >
               <button
                 className={`px-3 py-1 rounded border ${
                   pageNum === currentPageInt
@@ -237,7 +260,7 @@ export default async function BlogPage(props: { params: PageProps }) {
         })}
 
         {/* Next button */}
-        <Link href={`/blog/${currentPageInt + 1}`}>
+        <Link href={`/blog/page/${currentPageInt + 1}`}>
           <button
             className="px-3 py-1 rounded border text-gray-600 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
             disabled={currentPageInt === totalPages}
