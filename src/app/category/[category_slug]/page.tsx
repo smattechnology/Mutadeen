@@ -1,7 +1,6 @@
 "use strict";
 import React from "react";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import PostCard from "@/components/card/PostCard";
 
 interface CategoryData {

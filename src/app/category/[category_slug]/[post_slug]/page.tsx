@@ -13,7 +13,7 @@ interface BlogPost {
   category_id: string;
   title: string;
   slug: string;
-  body: Record<string, any>; // Tiptap JSON
+  body: Record<string, JSON>; // Tiptap JSON
   created_at: string;
   updated_at?: string;
 }

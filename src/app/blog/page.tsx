@@ -169,7 +169,7 @@ export default async function BlogPage({ params }: PageProps) {
 
   // Calculate which page numbers to show (4 total)
   let startPage = Math.max(1, currentPageInt - 1);
-  let endPage = Math.min(totalPages, startPage + 3);
+  const endPage = Math.min(totalPages, startPage + 3);
 
   // Adjust startPage if less than 4 pages shown at the end
   if (endPage - startPage < 3) {
