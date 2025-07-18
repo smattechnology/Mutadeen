@@ -148,8 +148,8 @@ const dummyPosts = [
 ];
 
 interface PageProps {
-  params: {
-    currentPage: Promise<{ currentPage: string }> | { currentPage: string };
+  params?: {
+    currentPage?: Promise<{ currentPage: string }> | { currentPage: string };
   };
 }
 
