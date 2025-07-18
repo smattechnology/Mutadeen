@@ -1,15 +1,10 @@
-import React from "react";
-import { Search } from "lucide-react";
+"use client";
+import React, { useState, useEffect } from "react";
+import { Menu, Search, X } from "lucide-react";
 import Link from "next/link";
+
 const Header = () => {
-  // ✓ হোম
-  // ✓ গ্যালারি
-  // ✓ ব্লগ (নিচে লাইক কমেন্ট অপসন দিয়েন)
-  // ✓ কুইজ (এটা বিশাল বড় প্ল্যান, আপাতত এমনি হবে)
-  // ✓ পিডিএফ
-  // ✓ ভিডিও
-  // ✓ ডোনেশন
-  // ✓ স্বেচ্ছাসেবক রেজিস্ট্রেশন ফরম
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
     { name: "হোম", href: "/" },
@@ -22,30 +17,49 @@ const Header = () => {
     { name: "স্বেচ্ছাসেবক রেজিস্ট্রেশন", href: "/volunteer-registration" },
   ];
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [isMenuOpen]);
+
   return (
-    <header className="w-full py-4 bg-gray-100 border-b border-gray-200 space-y-4">
-      <div className="lg:max-w-7xl mx-auto flex justify-between items-center">
+    <header className="w-full bg-gray-100 border-b border-gray-200 relative z-50">
+      {/* Top Header */}
+      <div className="lg:max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="text-xl font-bold">
           Mutadeen
         </Link>
 
-        <div className="flex justify-center items-center gap-3">
-          <button className="px-4 py-2 text-white rounded-sm bg-brand">
+        <div className="md:hidden">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-gray-800 focus:outline-none"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        <div className="hidden md:flex items-center gap-3">
+          <button className="px-4 py-2 text-white rounded bg-brand">
             Login
           </button>
-          <button className="px-4 py-2 text-white rounded-sm bg-brand">
+          <button className="px-4 py-2 text-white rounded bg-brand">
             Register
           </button>
         </div>
       </div>
 
-      <nav className="bg-2">
-        <ul className="lg:max-w-7xl mx-auto flex space-x-2 px-4 py-2">
+      {/* Desktop Nav */}
+      <nav className="hidden md:block bg-gray-800">
+        <ul className="lg:max-w-7xl mx-auto flex px-4 py-2 space-x-4">
           {navLinks.map((link) => (
             <li key={link.name}>
               <Link
                 href={link.href}
-                className="text-white hover:text-blue-500 px-4 py-2"
+                className="text-white hover:text-blue-400 px-2 py-1"
               >
                 {link.name}
               </Link>
@@ -54,17 +68,57 @@ const Header = () => {
         </ul>
       </nav>
 
-      <div className="w-full flex justify-center items-center">
-        <div className="flex lg:w-4xl mx-auto border border-gray-300 rounded-md p-2 bg-white">
+      {/* 🔥 Mobile Menu Overlay */}
+      <div
+        className={`fixed top-0 left-0 w-full h-full z-40 transition-all duration-300 ease-in-out ${
+          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        }`}
+        onClick={() => setIsMenuOpen(false)}
+      />
+
+      {/* 🔥 Mobile Menu Panel */}
+      <div
+        className={`fixed top-16 left-0 w-full bg-gray-800 z-50 transform transition-all duration-300 ease-in-out ${
+          isMenuOpen
+            ? "translate-y-0 opacity-100"
+            : "-translate-y-10 opacity-0 pointer-events-none"
+        }`}
+      >
+        <ul className="flex flex-col space-y-1 px-4 py-4">
+          {navLinks.map((link) => (
+            <li key={link.name}>
+              <Link
+                href={link.href}
+                className="block text-white hover:text-blue-400 py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+            </li>
+          ))}
+          <div className="mt-4 flex flex-col gap-2">
+            <button className="w-full px-4 py-2 text-white rounded bg-brand">
+              Login
+            </button>
+            <button className="w-full px-4 py-2 text-white rounded bg-brand">
+              Register
+            </button>
+          </div>
+        </ul>
+      </div>
+
+      {/* Search Bar */}
+      <div className="w-full px-4 py-3 flex justify-center items-center bg-white">
+        <div className="w-full md:max-w-3xl flex border border-gray-300 rounded-md">
           <input
             type="text"
             name="search"
             id="search"
             placeholder="Search here..."
-            className="w-full px-2 outline-none"
+            className="w-full px-3 py-2 outline-none rounded-l-md"
           />
-          <button className="p-2 rounded-md text-black cursor-pointer hover:text-blue-500">
-            <Search size={15} />
+          <button className="px-4 text-gray-600 hover:text-blue-500">
+            <Search size={20} />
           </button>
         </div>
       </div>

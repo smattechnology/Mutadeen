@@ -81,7 +81,7 @@ export default function Home() {
     <div className="w-full h-full">
       {/* <Banner /> */}
       {/* <Categories */}
-      <div className="p-4 h-full lg:max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="p-4 h-full lg:max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4">
         {cards.map((card, index) => (
           <Card
             key={index}

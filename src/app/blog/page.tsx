@@ -187,8 +187,8 @@ export default async function BlogPage(props: { params: PageProps }) {
         <h2 className="p-2 text-3xl font-bold">ব্লগস (Blogs)</h2>
       </div>
 
-      <div className="w-full pt-4 lg:max-w-7xl mx-auto flex justify-between items-start gap-4">
-        <div className="w-4/5 flex flex-col gap-4">
+      <div className="w-full pt-4 px-2 md:px-0 lg:max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-4">
+        <div className="w-full md:w-4/5 flex flex-col gap-4">
           {pagedPosts.map((post) => (
             <PostCard
               key={post.id}
@@ -202,7 +202,7 @@ export default async function BlogPage(props: { params: PageProps }) {
             />
           ))}
         </div>
-        <div className="w-1/5">
+        <div className="w-full md:w-1/5">
           <div className="w-full border-b-4 border-[#4FCE5D]">
             <span className="text-2xl font-bold">ক্যাটাগরি (Category)</span>
           </div>
