@@ -148,18 +148,19 @@ const dummyPosts = [
 ];
 
 interface PageProps {
-  params?: {
-    currentPage?: Promise<{ currentPage?: string }> | { currentPage?: string };
+  params: {
+    page: string; // Not an array!
   };
 }
 
 const POSTS_PER_PAGE = 10; // adjust if needed
 
 export default async function BlogPage({ params }: PageProps) {
-  const page = params instanceof Promise ? await params : params;
-  const { currentPage } = page;
+  const currentPageInt = parseInt(params.page || "1", 10);
 
-  const currentPageInt = parseInt(currentPage ? currentPage : 1, 10);
+  if (isNaN(currentPageInt) || currentPageInt < 1) {
+    return <div>Invalid page</div>;
+  }
   const totalPages = Math.ceil(dummyPosts.length / POSTS_PER_PAGE);
 
   // Validate current page bounds
