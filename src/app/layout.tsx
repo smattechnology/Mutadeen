@@ -25,15 +25,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased w-full h-screen min-h-full bg-white text-black`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-full flex flex-col`}
       >
-        <div className="w-full flex flex-col items-start">
+        <div className="w-full border-2 border-green-800">
           <Header />
-          <Banner />
         </div>
-        <div className="">{children}</div>
+        <main className="flex-1">{children}</main>
 
         <div className="flex flex-col items-center justify-center p-8 border-t border-gray-200 bg-3 text-gray-300">
           {/* Footer or additional content can go here */}

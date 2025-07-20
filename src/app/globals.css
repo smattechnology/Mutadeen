@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
   /* // color brand = #4FCE5D
   // color 2 = #2C5C15

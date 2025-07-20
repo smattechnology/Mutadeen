@@ -78,10 +78,10 @@ export default function Home() {
   ];
 
   return (
-    <div className="w-full h-full">
-      {/* <Banner /> */}
+    <div className="w-full">
+      <Banner />
       {/* <Categories */}
-      <div className="p-4 h-full lg:max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className="p-4 lg:max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4">
         {cards.map((card, index) => (
           <Card
             key={index}
